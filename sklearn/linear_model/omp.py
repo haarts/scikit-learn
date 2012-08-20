@@ -59,7 +59,8 @@ def _cholesky_omp(X, y, n_nonzero_coefs, tol=None, copy_X=True,
 
     coefs, array, shape = (n_features, n_nonzero_coefs)
         The first k values of column k correspond to the coefficient value
-        for the active features at that step.
+        for the active features at that step. The lower left triangle contains
+        garbage. Only returned if ``return_path=True``.
 
     """
     if copy_X:
@@ -166,7 +167,8 @@ def _gram_omp(Gram, Xy, n_nonzero_coefs, tol_0=None, tol=None,
 
     coefs, array, shape = (n_features, n_nonzero_coefs)
         The first k values of column k correspond to the coefficient value
-        for the active features at that step.
+        for the active features at that step. The lower left triangle contains
+        garbage. Only returned if ``return_path=True``.
 
     """
     Gram = Gram.copy('F') if copy_Gram else np.asfortranarray(Gram)
@@ -279,7 +281,9 @@ def orthogonal_mp(X, y, n_nonzero_coefs=None, tol=None, precompute_gram=False,
     coef: array, shape = (n_features,) or (n_features, n_targets)
         Coefficients of the OMP solution. If `return_path=True`, this contains
         the whole coefficient path. In this case its shape is
-        (n_features, n_features) or (n_features, n_targets, n_features).
+        (n_features, n_features) or (n_features, n_targets, n_features) and
+        iterating over the last axis yields coefficients in increasing order
+        of active features.
 
     See also
     --------
@@ -398,7 +402,9 @@ def orthogonal_mp_gram(Gram, Xy, n_nonzero_coefs=None, tol=None,
     coef: array, shape = (n_features,) or (n_features, n_targets)
         Coefficients of the OMP solution. If `return_path=True`, this contains
         the whole coefficient path. In this case its shape is
-        (n_features, n_features) or (n_features, n_targets, n_features).
+        (n_features, n_features) or (n_features, n_targets, n_features) and
+        iterating over the last axis yields coefficients in increasing order
+        of active features.
 
     See also
     --------
