@@ -5,25 +5,24 @@
 # Author: Peter Prettenhofer <peter.prettenhofer@gmail.com>
 #         Olivier Grisel <olivier.grisel@ensta.org>
 #
-# License: BSD Style.
+# Licence: BSD 3 clause
 
+from libc.math cimport sqrt
 import numpy as np
 import scipy.sparse as sp
-from ..utils.extmath import norm
-from ..utils.fixes import bincount
 cimport numpy as np
 cimport cython
+
+from ..utils.extmath import norm
+from ..utils.fixes import bincount
 
 ctypedef np.float64_t DOUBLE
 ctypedef np.int32_t INT
 
-
-cdef extern from "math.h":
-    double sqrt(double f)
-
-
 cdef extern from "cblas.h":
     double ddot "cblas_ddot"(int N, double *X, int incX, double *Y, int incY)
+
+np.import_array()
 
 
 @cython.boundscheck(False)
@@ -34,7 +33,7 @@ cpdef DOUBLE _assign_labels_array(np.ndarray[DOUBLE, ndim=2] X,
                                   np.ndarray[DOUBLE, ndim=2] centers,
                                   np.ndarray[INT, ndim=1] labels,
                                   np.ndarray[DOUBLE, ndim=1] distances):
-    """Compute label assignement and inertia for a dense array
+    """Compute label assignment and inertia for a dense array
 
     Return the inertia (sum of squared distances to the centers).
     """
@@ -87,7 +86,7 @@ cpdef DOUBLE _assign_labels_csr(X, np.ndarray[DOUBLE, ndim=1] x_squared_norms,
                                 np.ndarray[DOUBLE, ndim=2] centers,
                                 np.ndarray[INT, ndim=1] labels,
                                 np.ndarray[DOUBLE, ndim=1] distances):
-    """Compute label assignement and inertia for a CSR input
+    """Compute label assignment and inertia for a CSR input
 
     Return the inertia (sum of squared distances to the centers).
     """
