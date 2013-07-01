@@ -43,17 +43,22 @@ class BernoulliRBM(BaseEstimator, TransformerMixin):
     ----------
     n_components : int, optional
         Number of binary hidden units
+
     learning_rate : float, optional
         Learning rate to use during learning. It is *highly* recommended
         to tune this hyper-parameter. Possible values are 10**[0., -3.].
+
     batch_size : int, optional
         Number of examples per minibatch.
+
     n_iter : int, optional
         Number of iterations/sweeps over the training dataset to perform
         during training.
+
     verbose: bool, optional
         When True (False by default) the method outputs the progress
         of learning after each iteration.
+
     random_state : integer or numpy.RandomState, optional
         A random number generator instance to define the state of the
         random permutations generator. If an integer is given, it fixes the
@@ -64,8 +69,10 @@ class BernoulliRBM(BaseEstimator, TransformerMixin):
     components_ : array-like, shape (n_components, n_features), optional
         Weight matrix, where n_features in the number of visible
         units and n_components is the number of hidden units.
+
     intercept_hidden_ : array-like, shape (n_components,), optional
         Biases of the hidden units
+
     intercept_visible_ : array-like, shape (n_features,), optional
         Biases of the visible units
 
@@ -103,6 +110,7 @@ class BernoulliRBM(BaseEstimator, TransformerMixin):
         Parameters
         ----------
         x: array-like, shape (M, N)
+
         rng: numpy RandomState object
 
         Notes
@@ -155,6 +163,7 @@ class BernoulliRBM(BaseEstimator, TransformerMixin):
         Parameters
         ----------
         v: array-like, shape (n_samples, n_features)
+
         rng: numpy RandomState object
 
         Returns
@@ -185,6 +194,7 @@ class BernoulliRBM(BaseEstimator, TransformerMixin):
         Parameters
         ----------
         h: array-like, shape (n_samples, n_components)
+
         rng: numpy RandomState object
 
         Returns
@@ -236,6 +246,7 @@ class BernoulliRBM(BaseEstimator, TransformerMixin):
         Parameters
         ----------
         v_pos: array-like, shape (n_samples, n_features)
+
         rng: numpy RandomState object
 
         Returns
